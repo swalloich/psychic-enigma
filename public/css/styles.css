@@ -15,7 +15,7 @@
  *******************************************************************/
 
 :root {
-  --light-blue: #27bcda;
+  --primary-color: orange;
 
   --header-bg-color: #242332;
 
@@ -118,12 +118,12 @@ nav a, nav a:active, nav a:visited {
 
 /* color */
 
-.jn-bg-light-blue {
-  background-color: var(--light-blue);
+.jn-bg-primary-color {
+  background-color: var(--primary-color);
 }
 
-.jn-font-light-blue {
-  color: var(--light-blue);
+.jn-font-primary-color {
+  color: var(--primary-color);
 }
 /* end utility classes */
 
@@ -142,7 +142,7 @@ nav a, nav a:active, nav a:visited {
 /* begin translucent card */
 .tl-card {
   width: 200px;
-  background-color: #FFFFFFaa;
+  background-color: #ffffffea;
 }
 /* end translucent card*/
 
@@ -169,7 +169,7 @@ nav a, nav a:active, nav a:visited {
   align-items: center;
   width: 100%;
 
-  background-color: var(--light-blue);
+  background-color: var(--primary-color);
 }
 /* end upgrade card */
 
@@ -192,7 +192,7 @@ main {
   }
 
   #wrapper {
-    border: 2px solid var(--light-blue);
+    border: 2px solid var(--primary-color);
     border-radius: 10px;
     width: 100%;
     max-width: 800px;
