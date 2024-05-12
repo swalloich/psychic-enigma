@@ -24,16 +24,13 @@
 }
 
 html, body {
-  --body-y-padding: 20px;
+  --body-y-padding: 12px;
   min-height: 100vh;
 }
 
 body {
   display: flex;
   flex-direction: column;
-}
-
-body {
   margin: 0;
   background-image: url(../images/site/checkerboard.jpg);
   background-size: 55%;
@@ -149,7 +146,7 @@ nav a, nav a:active, nav a:visited {
 /* begin side-by-side container */
 .side-by-side-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 /* end side-by-side container */
 
@@ -195,7 +192,7 @@ main {
     border: 2px solid var(--primary-color);
     border-radius: 10px;
     width: 100%;
-    max-width: 800px;
+    max-width: 95vw;
     margin: 0 auto;
     padding: 0 15px;
   }
