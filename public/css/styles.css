@@ -232,11 +232,9 @@ main {
 
 }
 
-/* Large page */
-@media only screen and (min-width: 1000px) {
-
+@media only screen and (min-width: 950px) {
   #wrapper {
-    max-width: 1200px;
+    max-width: 850px;
   }
 
   .banner {
@@ -249,6 +247,14 @@ main {
     position: absolute;
     top: 30%;
     left: 15%;
+  }
+}
+
+/* Large page */
+@media only screen and (min-width: 1300px) {
+
+  #wrapper {
+    max-width: 1200px;
   }
 
 }
