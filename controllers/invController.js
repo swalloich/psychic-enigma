@@ -3,8 +3,8 @@ const utilities = require('../utilities/')
 
 const invCont = {}
 
-invCont.buildByClassificationId = async function(req, res, next) {
-    const classification_id = req.params.classification_id
+invCont.buildByClassificationId = async function (req, res, next) {
+    const classification_id = req.params.classificationId
     const data = await invModel.getInventoryByClassificationId(classification_id)
     const grid = await utilities.buildClassificationGrid(data)
     let nav = await utilities.getNav()
@@ -12,7 +12,7 @@ invCont.buildByClassificationId = async function(req, res, next) {
     res.render("./inventory/classification", {
         title: className + " vehicles",
         nav,
-        grid
+        grid,
     })
 }
 

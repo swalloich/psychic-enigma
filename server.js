@@ -25,6 +25,7 @@ app.set('layout', './layouts/layout')
  *************************/
 app.use(static)
 app.get('/', baseController.buildHome);
+app.use('/inv', inventoryRoute);
 
 /* ***********************
  * Local Server Information
