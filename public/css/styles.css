@@ -18,6 +18,7 @@
   --primary-color: orange;
 
   --header-bg-color: #242332;
+  --light-gray: #f6f6f6;
 
   --default-text-color: black;
   --dark-bg-text-color: white;
@@ -186,6 +187,31 @@ main {
   flex: 1 0;
 }
 
+/* Inventory Item View */
+
+.inv-view-container {
+  display: flex;
+  flex-direction: column; /* will be row on larger viewports */
+}
+
+.inv-view-container > .img-container {
+  width: 100%; /* will be 50 on larger viewports */
+}
+
+.inv-view-container > .item-desc-container {
+  width: 100%; /* will be 50 on larger viewports */
+}
+
+/* End Inventory Item View */
+/* Utility classes */
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* End utility classes */
+
 /* Medium page */
 @media only screen and (min-width: 500px) {
   body {
@@ -233,6 +259,22 @@ main {
   .side-by-side-container > :first-child {
     margin-right: 20px;
   }
+
+  /* med Inventory Item View */
+
+  .inv-view-container {
+    flex-direction: row;
+  }
+
+  .inv-view-container > .img-container {
+    width: 50%; /* will be 100 on smaller viewports */
+  }
+  
+  .inv-view-container > .item-desc-container {
+    width: 50%; /* will be 100 on smaller viewports */
+  }
+
+  /* end med Inventory Item View */
 
 }
 

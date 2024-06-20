@@ -1,0 +1,19 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+<% } else { res.redirect('/') } %>
+
+<%# messages() %>
+<div class="inv-view-container">
+    <div class="img-container">
+        <img
+            class="mx-auto"
+            src="<%= img.url ? img.url : "https://placehold.co/400x400?text=Not\nFound"%>"
+            alt="<%= img.alt ? img.alt : "Not Found" %>"
+        />
+    </div>
+    <div class="item-desc-container">
+        <%= description %>
+    </div>
+</div>
