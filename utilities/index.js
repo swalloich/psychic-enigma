@@ -56,11 +56,11 @@ Util.buildInvItemDescription = async function (data) {
     if (data.length > 1) {
         description = "<p>There was a problem while getting the vehicle!</p>";
     } else if (data.length == 1) {
-        description = `<h2>${data.inv_make.charAt(0).toUpperCase()} ${data.inv_model.charAt(0).toUpperCase()} Details</h2>`;
-        description += `<p>Price: $${data.inv_price.toLocaleString()}</p>`;
-        description += `<p><span>Description:</span> ${data.inv_description}</p>`;
-        description += `<p><span>Color:</span> ${data.inv_color}</p>`;
-        description += `<p><span>Miles:</span> ${data.inv_miles.toLocaleString()}</p>`
+        description = `<h2>${data[0].inv_make.charAt(0).toUpperCase()} ${data[0].inv_model.charAt(0).toUpperCase()} Details</h2>`;
+        description += `<p>Price: $${data[0].inv_price.toLocaleString()}</p>`;
+        description += `<p><span>Description:</span> ${data[0].inv_description}</p>`;
+        description += `<p><span>Color:</span> ${data[0].inv_color}</p>`;
+        description += `<p><span>Miles:</span> ${data[0].inv_miles.toLocaleString()}</p>`
     }
     return description;
 }
