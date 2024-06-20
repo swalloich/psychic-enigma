@@ -1,3 +1,4 @@
+const { DatabaseError } = require('pg')
 const pool = require('../database/')
 
 async function getClassifications() {
@@ -25,6 +26,9 @@ async function getInventoryByInvId(inventory_id) {
             `SELECT * FROM public.inventory AS i WHERE i.inv_id = $1`,
             [inventory_id]
         );
+        if (data.rowCount > 1) {
+            throw Error("More than one result was returned!")
+        }
         return data.rows
     } catch (err) {
         console.error("getInventoryByInvId error: " + err)

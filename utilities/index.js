@@ -52,7 +52,17 @@ Util.buildClassificationGrid = async function (data) {
 }
 
 Util.buildInvItemDescription = async function (data) {
-    console.log(data)
+    let description = "<p>Vehicle not found!</p>"
+    if (data.length > 1) {
+        description = "<p>There was a problem while getting the vehicle!</p>";
+    } else if (data.length == 1) {
+        description = `<h2>${data.inv_make.charAt(0).toUpperCase()} ${data.inv_model.charAt(0).toUpperCase()} Details</h2>`;
+        description += `<p>Price: $${data.inv_price.toLocaleString()}</p>`;
+        description += `<p><span>Description:</span> ${data.inv_description}</p>`;
+        description += `<p><span>Color:</span> ${data.inv_color}</p>`;
+        description += `<p><span>Miles:</span> ${data.inv_miles.toLocaleString()}</p>`
+    }
+    return description;
 }
 
 module.exports = Util
