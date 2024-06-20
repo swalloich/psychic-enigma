@@ -51,4 +51,8 @@ Util.buildClassificationGrid = async function (data) {
     return grid
 }
 
+Util.buildInventoryView = async function (data) {
+    console.log(data)
+}
+
 module.exports = Util
