@@ -1,4 +1,3 @@
-const { DatabaseError } = require('pg')
 const pool = require('../database/')
 
 async function getClassifications() {
