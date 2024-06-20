@@ -21,7 +21,7 @@ invCont.buildByInvId = async function (req, res, next) {
     const data = await invModel.getInventoryByInvId(inventory_id);
     const bodyHtml = await utilities.buildInventoryView(data)
     let nav = await utilities.getNav()
-    res.render("./inventory/inventoryItem")
+    res.render("./inventory/item")
 }
 
 module.exports = invCont
