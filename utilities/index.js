@@ -51,7 +51,7 @@ Util.buildClassificationGrid = async function (data) {
     return grid
 }
 
-Util.buildInventoryView = async function (data) {
+Util.buildInvItemDescription = async function (data) {
     console.log(data)
 }
 
