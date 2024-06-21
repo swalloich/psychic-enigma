@@ -26,21 +26,32 @@ app.set('layout', './layouts/layout')
  *************************/
 app.use(static)
 app.get('/', utilities.handleErrors(baseController.buildHome));
-app.use('/inv', inventoryRoute);
+app.use('/inv', utilities.handleErrors(inventoryRoute));
+
+/* 404 Handler */
+app.use(async (req, res, next) => {
+  let nav = await utilities.getNav();
+  res.status(404).render("errors/error", {
+    title: "404 - Page Not Found",
+    message: "The page you're looking for does not exist.",
+    nav
+  });
+});
 
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
 *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  res.render("errors/error", {
-    title: err.status || 'Server Error',
+  const status = err.status || 500;
+  let nav = await utilities.getNav();
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+  res.status(status).render("errors/error", {
+    title: (status == 404) ? "404 - Page Not Found" : `${status} - Server Error`,
     message: err.message,
     nav
-  })
-})
+  });
+});
 
 /* ***********************
  * Local Server Information
