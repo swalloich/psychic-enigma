@@ -51,4 +51,25 @@ Util.buildClassificationGrid = async function (data) {
     return grid
 }
 
+Util.buildInvItemDescription = async function (data) {
+    let description = "<p>Vehicle not found!</p>"
+    if (data.length > 1) {
+        description = "<p>There was a problem while getting the vehicle!</p>";
+    } else if (data.length == 1) {
+        description = `<h2 class="text-bold">${data[0].inv_make} ${data[0].inv_model} Details</h2>`;
+        description += `<p class="text-bold">Price: $${data[0].inv_price.toLocaleString()}</p>`;
+        description += `<p><span class="text-bold">Description:</span> ${data[0].inv_description}</p>`;
+        description += `<p><span class="text-bold">Color:</span> ${data[0].inv_color}</p>`;
+        description += `<p><span class="text-bold">Miles:</span> ${data[0].inv_miles.toLocaleString()}</p>`
+    }
+    return description;
+}
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
 module.exports = Util

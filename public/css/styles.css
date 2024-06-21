@@ -18,6 +18,7 @@
   --primary-color: orange;
 
   --header-bg-color: #242332;
+  --light-gray: #f6f6f6;
 
   --default-text-color: black;
   --dark-bg-text-color: white;
@@ -93,7 +94,7 @@ nav a, nav a:active, nav a:visited {
   text-decoration: none;
 }
 
-/* begin utlity classes */
+/* begin utility classes */
 /* display mode */
 .jn-d-flex {
   display: flex;
@@ -126,6 +127,16 @@ nav a, nav a:active, nav a:visited {
 .jn-font-primary-color {
   color: var(--primary-color);
 }
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
 /* end utility classes */
 
 /* begin banner */
@@ -186,6 +197,26 @@ main {
   flex: 1 0;
 }
 
+/* Inventory Item View */
+.inv-view-container {
+  display: flex;
+  flex-direction: column; /* will be row on larger viewports */
+}
+
+.inv-view-container > .img-container,
+.inv-view-container > .item-desc-container {
+  max-width: 100%; /* will be 50 on larger viewports */
+}
+
+.item-desc-container > :nth-child(2n) {
+  background-color: var(--light-gray);
+}
+
+.item-desc-container > :nth-child(n):not(h1, h2, h3, h4, h5) {
+  padding: 15px 10px;
+}
+/* End Inventory Item View */
+
 /* Medium page */
 @media only screen and (min-width: 500px) {
   body {
@@ -233,6 +264,20 @@ main {
   .side-by-side-container > :first-child {
     margin-right: 20px;
   }
+
+  /* med Inventory Item View */
+
+  .inv-view-container {
+    flex-direction: row;
+    column-gap: 5%;
+  }
+
+  .inv-view-container > .img-container,
+  .inv-view-container > .item-desc-container {
+    max-width: 50%; /* will be 100 on smaller viewports */
+  }
+
+  /* end med Inventory Item View */
 
 }
 
