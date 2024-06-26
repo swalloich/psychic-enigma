@@ -14,7 +14,8 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute");
-const utilities = require("./utilities/index")
+const accountRoute = require("./routes/accountRoute");
+const { Util } = require("./utilities/index");
 
 /* ***********************
  * Middleware
@@ -31,7 +32,7 @@ app.use(session({
 }));
 
 app.use(require('connect-flash')())
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
@@ -47,12 +48,13 @@ app.set('layout', './layouts/layout')
  * Routes
  *************************/
 app.use(static)
-app.get('/', utilities.handleErrors(baseController.buildHome));
-app.use('/inv', utilities.handleErrors(inventoryRoute));
+app.get('/', Util.handleErrors(baseController.buildHome));
+app.use('/inv', Util.handleErrors(inventoryRoute));
+app.use('/account', Util.handleErrors(accountRoute));
 
 /* 404 Handler */
 app.use(async (req, res, next) => {
-  let nav = await utilities.getNav();
+  let nav = await Util.getNav();
   res.status(404).render("errors/error", {
     title: "404 - Page Not Found",
     message: "The page you're looking for does not exist.",
@@ -66,7 +68,7 @@ app.use(async (req, res, next) => {
 *************************/
 app.use(async (err, req, res, next) => {
   const status = err.status || 500;
-  let nav = await utilities.getNav();
+  let nav = await Util.getNav();
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
   res.status(status).render("errors/error", {
     title: (status == 404) ? "404 - Page Not Found" : `${status} - Server Error`,

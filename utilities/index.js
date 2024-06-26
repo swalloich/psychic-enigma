@@ -1,4 +1,16 @@
 const invModel = require("../models/inventory-model")
+
+/* ****************************************
+*  Deliver login view
+* *************************************** */
+async function buildLogin(req, res, next) {
+    let nav = await Util.getNav()
+    res.render("account/login", {
+        title: "Login",
+        nav,
+    });
+}
+
 const Util = {}
 
 Util.getNav = async function (req, res, next) {
@@ -72,4 +84,4 @@ Util.buildInvItemDescription = async function (data) {
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
-module.exports = Util
+module.exports = {Util, buildLogin}
