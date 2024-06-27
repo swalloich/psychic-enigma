@@ -3,6 +3,14 @@ const { Util } = require('../utilities');
 
 const accountController = {}
 
+accountController.buildLogin = async function (req, res, next) {
+    let nav = await Util.getNav()
+    res.render("account/login", {
+        title: "Login",
+        nav,
+    });
+}
+
 accountController.buildAccountById = async function (req, res, next) {
     try {
         const accountId = req.params.accountId;

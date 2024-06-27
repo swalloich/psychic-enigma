@@ -69,14 +69,6 @@ Util.buildInvItemDescription = async function (data) {
     return description;
 }
 
-Util.buildLogin = async function (req, res, next) {
-    let nav = await Util.getNav()
-    res.render("account/login", {
-        title: "Login",
-        nav,
-    });
-}
-
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
