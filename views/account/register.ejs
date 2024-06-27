@@ -1,0 +1,26 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+<% } else { res.redirect('/') } %>
+
+<%- messages() %>
+
+<form class="form-box">
+    <label for="account_firstname">First name</label>
+    <input type="text" id="account_firstname" name="account_firstname" required />
+    <label for="account_lastname">Last name</label>
+    <input type="text" id="account_lastname" name="account_lastname" required />
+    <label for="account_email">Username</label>
+    <input type="email" id="account_email" name="account_email" required />
+    <label for="account_password">Password</label>
+    <input type="password" id="account_password" name="account_password" required />
+    <p>Your password should contain:</p>
+    <ul>
+        <li>At least 12 characters.</li>
+        <li>1 capital letter.</li>
+        <li>1 number.</li>
+        <li>1 special character.</li>
+    </ul>
+    <button type="submit" class="button-primary mx-auto">Register</button>
+</form>

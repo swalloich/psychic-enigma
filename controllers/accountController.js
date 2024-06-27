@@ -11,6 +11,14 @@ accountController.buildLogin = async function (req, res, next) {
     });
 }
 
+accountController.buildRegistration = async function (req, res, next) {
+    let nav = await Util.getNav();
+    res.render("account/register", {
+        title: "Create an Account",
+        nav,
+    });
+}
+
 accountController.buildAccountById = async function (req, res, next) {
     try {
         const accountId = req.params.accountId;

@@ -220,8 +220,8 @@ main {
 }
 /* End Inventory Item View */
 
-/* Begin login box */
-.login-box {
+/* Begin form box */
+.form-box {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -232,30 +232,43 @@ main {
   box-sizing: border-box;
 }
 
-.login-box label:has(+ input) {
+.form-box label:has(+ input) {
   margin-bottom: 5px;
 }
 
-.login-box *:not(:last-child):not(label:has(+ input)) {
+.form-box *:not(:last-child, label:has(+ input), li, p:has(+ ul)) {
   margin-bottom: 15px;
 }
 
-.login-box button {
+.form-box p {
+  margin: 0;
+}
+
+.form-box p + ul {
+  margin-top: 5px;
+}
+/* End form box */
+
+/* Begin button */
+[class^="button-"] {
   width: fit-content;
   border-radius: 50rem;
   border: none;
   padding: 7.5px 20px;
-}
-
-.login-box button:hover {
-  background-color: orange;
   transition: background-color 0.1s linear;
+  cursor: pointer;
 }
 
-.login-box p {
-  margin: 0;
+.button-primary {
+  background-color: orange;
 }
-/* End login box */
+
+.button-primary:hover {
+  background-color: darkorange;
+}
+
+/* TODO: implement button-secondary */
+/* End button */
 
 /* Medium page */
 @media only screen and (min-width: 500px) {
@@ -338,12 +351,12 @@ main {
     left: 15%;
   }
 
-  /* Begin medium login box */
-    .login-box {
+  /* Begin medium form box */
+    .form-box {
       max-width: 500px;
       padding: 15px 30px;
     }
-  /* End medium login box */
+  /* End medium form box */
 }
 
 /* Large page */
