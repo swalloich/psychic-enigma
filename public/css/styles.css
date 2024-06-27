@@ -129,12 +129,15 @@ nav a, nav a:active, nav a:visited {
 }
 
 .mx-auto {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 .text-bold {
   font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
 }
 
 /* end utility classes */
@@ -221,21 +224,36 @@ main {
 .login-box {
   margin: 0 auto;
   display: flex;
-  row-gap: 15px;
   flex-direction: column;
   max-width: 80%;
-  padding: 12px;
+  padding: 15px 20px;
   border: 1px solid black;
   border-radius: 6px;
   box-sizing: border-box;
 }
 
-.login-box .form-row {
-  display: flex;
+.login-box label:has(+ input) {
+  margin-bottom: 5px;
 }
 
-.login-box .form-row input {
-  flex: 1 0 auto;
+.login-box *:not(:last-child):not(label:has(+ input)) {
+  margin-bottom: 15px;
+}
+
+.login-box button {
+  width: fit-content;
+  border-radius: 50rem;
+  border: none;
+  padding: 7.5px 20px;
+}
+
+.login-box button:hover {
+  background-color: orange;
+  transition: background-color 0.1s linear;
+}
+
+.login-box p {
+  margin: 0;
 }
 /* End login box */
 
@@ -319,11 +337,17 @@ main {
     top: 30%;
     left: 15%;
   }
+
+  /* Begin medium login box */
+    .login-box {
+      max-width: 500px;
+      padding: 15px 30px;
+    }
+  /* End medium login box */
 }
 
 /* Large page */
 @media only screen and (min-width: 1300px) {
-
   #wrapper {
     max-width: 1200px;
   }

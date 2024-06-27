@@ -7,12 +7,10 @@
 <%- messages() %>
 
 <form class="login-box">
-    <div class="form-row">
-        <label for="username_field">Username:</label>
-        <input type="text" id="username_field" required />
-    </div>
-    <div class="form-row">
-        <label for="password_field">Password:</label>
-        <input type="text" id="password_field" required />
-    </div>
+    <label for="account_email">Username:</label>
+    <input type="text" id="account_email" name="account_email" required />
+    <label for="account_password">Password:</label>
+    <input type="text" id="account_password" name="account_password" required />
+    <button type="submit" class="mx-auto">Login</button>
+    <p class="text-center">No Account? <a href="/account/create">Sign-up</a></p>
 </form>
