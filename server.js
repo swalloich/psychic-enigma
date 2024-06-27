@@ -49,8 +49,9 @@ app.set('layout', './layouts/layout')
  *************************/
 app.use(static)
 app.get('/', Util.handleErrors(baseController.buildHome));
-app.use('/inv', Util.handleErrors(inventoryRoute));
-app.use('/account', Util.handleErrors(accountRoute));
+// handleErrors for non-index routes called in route file.
+app.use('/inv', inventoryRoute);
+app.use('/account', accountRoute);
 
 /* 404 Handler */
 app.use(async (req, res, next) => {
