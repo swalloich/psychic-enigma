@@ -35,7 +35,7 @@ accountController.registerAccount = async function (req, res) {
             "notice",
             `Contratulations, you\'re registered ${account_firstname}. Please log in.`
         );
-        res.status(201).render('account.login', {
+        res.status(201).render('account/login', {
             title: "Login",
             nav,
         });
