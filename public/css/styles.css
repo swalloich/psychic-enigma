@@ -16,6 +16,9 @@
 
 :root {
   --primary-color: orange;
+  --error-red: #EB0D00;
+  --error-red-bg: #ff9d97;
+  --valid-green: #0be616;
 
   --header-bg-color: #242332;
   --light-gray: #f6f6f6;
@@ -92,6 +95,13 @@ nav li {
 header a, header a:active, header a:visited,
 nav a, nav a:active, nav a:visited {
   text-decoration: none;
+}
+
+/* Forms and input */
+input {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid black;
 }
 
 /* begin utility classes */
