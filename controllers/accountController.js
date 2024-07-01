@@ -1,10 +1,10 @@
 const acctModel = require("../models/account-model");
-const { Util } = require('../utilities');
+const utilities = require('../utilities');
 
 const accountController = {}
 
 accountController.buildLogin = async function (req, res, next) {
-    let nav = await Util.getNav()
+    let nav = await utilities.getNav()
     res.render("account/login", {
         title: "Login",
         nav,
@@ -12,7 +12,7 @@ accountController.buildLogin = async function (req, res, next) {
 }
 
 accountController.buildRegistration = async function (req, res, next) {
-    let nav = await Util.getNav();
+    let nav = await utilities.getNav();
     res.render("account/register", {
         title: "Create an Account",
         nav,
@@ -20,15 +20,16 @@ accountController.buildRegistration = async function (req, res, next) {
 }
 
 accountController.registerAccount = async function (req, res) {
-    let nav = await Util.getNav();
+    let nav = await utilities.getNav();
     const { account_firstname, account_lastname, account_email, account_password } = req.body;
 
-    const regResult = await acctModel.registerAccount(
-        account_firstname,
-        account_lastname,
-        account_email,
-        account_password
-    );
+    // TODO: uncomment this so account registration works.
+    // const regResult = await acctModel.registerAccount(
+    //     account_firstname,
+    //     account_lastname,
+    //     account_email,
+    //     account_password
+    // );
 
     if (regResult) {
         req.flash(
@@ -60,7 +61,7 @@ accountController.buildAccountById = async function (req, res, next) {
         }
 
         // const account = await utilities.buildAccountView(data);
-        let nav = await Util.getNav()
+        let nav = await utilities.getNav()
         // TODO: finish this.
     } catch (err) {
         next(err);

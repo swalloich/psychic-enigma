@@ -1,5 +1,5 @@
 const invModel = require('../models/inventory-model')
-const { Util } = require('../utilities/')
+const utilities = require('../utilities/')
 
 const invCont = {}
 
@@ -14,8 +14,8 @@ invCont.buildByClassificationId = async function (req, res, next) {
             return next(error);
         }
 
-        const grid = await Util.buildClassificationGrid(data)
-        let nav = await Util.getNav()
+        const grid = await utilities.buildClassificationGrid(data)
+        let nav = await util.getNav()
         const className = data[0].classification_name
         res.render("./inventory/classification", {
             title: className + " vehicles",
@@ -38,8 +38,8 @@ invCont.buildByInvId = async function (req, res, next) {
             return next(error);
         }
 
-        const bodyHtml = await Util.buildInvItemDescription(data);
-        let nav = await Util.getNav();
+        const bodyHtml = await utilities.buildInvItemDescription(data);
+        let nav = await utilities.getNav();
         res.render("./inventory/item", {
             title: `${data[0].inv_year} ${data[0].inv_make} ${data[0].inv_model}`,
             img: {

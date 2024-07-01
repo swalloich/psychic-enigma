@@ -16,7 +16,7 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
-const { Util } = require("./utilities/index");
+const utilities = require("./utilities/index");
 
 /* ***********************
  * Middleware
@@ -52,14 +52,14 @@ app.set('layout', './layouts/layout');
  * Routes
  *************************/
 app.use(static)
-app.get('/', Util.handleErrors(baseController.buildHome));
+app.get('/', utilities.handleErrors(baseController.buildHome));
 // handleErrors for non-index routes called in route file.
 app.use('/inv', inventoryRoute);
 app.use('/account', accountRoute);
 
 /* 404 Handler */
 app.use(async (req, res, next) => {
-  let nav = await Util.getNav();
+  let nav = await utilities.getNav();
   res.status(404).render("errors/error", {
     title: "404 - Page Not Found",
     message: "The page you're looking for does not exist.",
@@ -73,7 +73,7 @@ app.use(async (req, res, next) => {
 *************************/
 app.use(async (err, req, res, next) => {
   const status = err.status || 500;
-  let nav = await Util.getNav();
+  let nav = await utilities.getNav();
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
   res.status(status).render("errors/error", {
     title: (status == 404) ? "404 - Page Not Found" : `${status} - Server Error`,
