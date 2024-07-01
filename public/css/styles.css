@@ -150,6 +150,14 @@ input {
   text-align: center;
 }
 
+.text-error-red {
+  color: var(--error-red);
+}
+
+.text-italics {
+  font-style: italic;
+}
+
 /* end utility classes */
 
 /* begin banner */
