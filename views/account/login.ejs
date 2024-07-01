@@ -1,0 +1,21 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+<% } else { res.redirect('/') } %>
+
+<%- messages() %>
+
+<form class="form-box">
+    <label for="account_email">Email:</label>
+    <input type="email" id="account_email" name="account_email" placeholder="Enter a valid email" required />
+    <label for="account_password">Password:</label>
+    <input
+        type="password"
+        id="account_password"
+        name="account_password"
+        pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[!\(\)\-.?\[\]_`~;:@#$%^&amp;*+=])[A-Za-z0-9!\(\)\-.?\[\]_`~;:@#$%^&amp;*+=]{12,}$"
+        required />
+    <button type="submit" class="button-primary mx-auto">Login</button>
+    <p class="text-center">No Account? <a href="/account/register">Sign-up</a></p>
+</form>

@@ -16,6 +16,9 @@
 
 :root {
   --primary-color: orange;
+  --error-red: #EB0D00;
+  --error-red-bg: #ff9d97;
+  --valid-green: #0be616;
 
   --header-bg-color: #242332;
   --light-gray: #f6f6f6;
@@ -94,6 +97,13 @@ nav a, nav a:active, nav a:visited {
   text-decoration: none;
 }
 
+/* Forms and input */
+input {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
 /* begin utility classes */
 /* display mode */
 .jn-d-flex {
@@ -129,12 +139,23 @@ nav a, nav a:active, nav a:visited {
 }
 
 .mx-auto {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 .text-bold {
   font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-error-red {
+  color: var(--error-red);
+}
+
+.text-italics {
+  font-style: italic;
 }
 
 /* end utility classes */
@@ -217,6 +238,56 @@ main {
 }
 /* End Inventory Item View */
 
+/* Begin form box */
+.form-box {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  padding: 15px 20px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.form-box label:has(+ input) {
+  margin-bottom: 5px;
+}
+
+.form-box *:not(:last-child, label:has(+ input), li, p:has(+ ul)) {
+  margin-bottom: 15px;
+}
+
+.form-box p {
+  margin: 0;
+}
+
+.form-box p + ul {
+  margin-top: 5px;
+}
+/* End form box */
+
+/* Begin button */
+[class^="button-"] {
+  width: fit-content;
+  border-radius: 50rem;
+  border: none;
+  padding: 7.5px 20px;
+  transition: background-color 0.1s linear;
+  cursor: pointer;
+}
+
+.button-primary {
+  background-color: orange;
+}
+
+.button-primary:hover {
+  background-color: darkorange;
+}
+
+/* TODO: implement button-secondary */
+/* End button */
+
 /* Medium page */
 @media only screen and (min-width: 500px) {
   body {
@@ -297,11 +368,17 @@ main {
     top: 30%;
     left: 15%;
   }
+
+  /* Begin medium form box */
+    .form-box {
+      max-width: 500px;
+      padding: 15px 30px;
+    }
+  /* End medium form box */
 }
 
 /* Large page */
 @media only screen and (min-width: 1300px) {
-
   #wrapper {
     max-width: 1200px;
   }

@@ -1,0 +1,39 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+<% } else { res.redirect('/') } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li class="text-error-red"><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<form class="form-box" action="/account/register" method="post">
+    <label for="account_firstname">First name</label>
+    <input type="text" id="account_firstname" name="account_firstname" placeholder="John" required />
+    <label for="account_lastname">Last name</label>
+    <input type="text" id="account_lastname" name="account_lastname" placeholder="Doe" required />
+    <label for="account_email">Email</label>
+    <input type="email" id="account_email" name="account_email" placeholder="john.doe@email.com" required />
+    <label for="account_password">Password</label>
+    <input
+        type="password"
+        id="account_password"
+        name="account_password"
+        pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[!\(\)\-.?\[\]_`~;:@#$%^&amp;*+=])[A-Za-z0-9!\(\)\-.?\[\]_`~;:@#$%^&amp;*+=]{12,}$"
+        required />
+    <p>Your password should contain:</p>
+    <ul>
+        <li>At least 12 total characters.</li>
+        <li>At least 1 capital letter.</li>
+        <li>At least 1 number.</li>
+        <li>At least 1 special character.</li>
+    </ul>
+    <button type="submit" class="button-primary mx-auto">Register</button>
+</form>

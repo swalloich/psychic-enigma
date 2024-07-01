@@ -1,4 +1,8 @@
 const invModel = require("../models/inventory-model")
+
+/* ****************************************
+*  Deliver login view
+* *************************************** */
 const Util = {}
 
 Util.getNav = async function (req, res, next) {
