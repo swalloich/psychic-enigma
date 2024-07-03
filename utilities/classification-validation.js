@@ -1,10 +1,8 @@
 const utilities = require("./index");
 const { body, validationResult } = require("express-validator");
-
 const Validate = {}
 
 Validate.registrationRules = () => {
-    console.log("called classification registration rules");
     return [
         body("classification_name")
             .trim()
@@ -16,7 +14,6 @@ Validate.registrationRules = () => {
 }
 
 Validate.checkClassificationData = async (req, res, next) => {
-    console.log("called checkClassificaitonData")
     const { classification_name } = req.body;
     let errors = [];
     errors = validationResult(req);
@@ -26,7 +23,7 @@ Validate.checkClassificationData = async (req, res, next) => {
             errors,
             title: "Inventory Management Dashboard",
             nav,
-            classification_name
+            classification_name,
         });
         return
     }

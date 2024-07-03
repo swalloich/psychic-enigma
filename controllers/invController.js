@@ -90,7 +90,7 @@ invCont.addClassification = async function (req, res) {
             "notice",
             `The classification "${classification_name}" has been added.`
         );
-        res.status(201).render('inventory/management', {
+        res.status(201).render('./inventory/management', {
             title: "Inventory Management Dasboard",
             nav
         });
@@ -99,7 +99,7 @@ invCont.addClassification = async function (req, res) {
             "notice",
             `Failed to add classification "${classification_name}"`
         );
-        res.status(501).render("inventory/management", {
+        res.status(501).render("./inventory/management", {
             title: "Inventory Management Dashboard",
             nav
         });

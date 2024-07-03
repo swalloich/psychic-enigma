@@ -11,7 +11,7 @@ router.post(
     "/add-classification",
     classValidate.registrationRules(),
     classValidate.checkClassificationData,
-    utilities.handleErrors(invController.addClassification)
+    utilities.handleErrors(invController.addClassification),
 );
 
 module.exports = router;
