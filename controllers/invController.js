@@ -66,4 +66,44 @@ invCont.buildInvManagement = async function (req, res, next) {
     }
 }
 
+invCont.buildAddClassification = async function (req, res, next) {
+    try {
+        let nav = await utilities.getNav();
+        res.render("./inventory/add-classification", {
+            title: "Add a Classification",
+            nav,
+        })
+    } catch (err) {
+        next(err);
+    }
+}
+
+invCont.addClassification = async function (req, res) {
+    console.log("called addClassification");
+    let nav = await utilities.getNav();
+    const { classification_name } = req.body;
+
+    const classResult = await invModel.addClassification(classification_name);
+
+    if (classResult) {
+        req.flash(
+            "notice",
+            `The classification "${classification_name}" has been added.`
+        );
+        res.status(201).render('inventory/management', {
+            title: "Inventory Management Dasboard",
+            nav
+        });
+    } else {
+        req.flash(
+            "notice",
+            `Failed to add classification "${classification_name}"`
+        );
+        res.status(501).render("inventory/management", {
+            title: "Inventory Management Dashboard",
+            nav
+        });
+    }
+}
+
 module.exports = invCont

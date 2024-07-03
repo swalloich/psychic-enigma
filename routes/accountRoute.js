@@ -12,7 +12,7 @@ router.post(
     "/register",
     regValidate.registrationRules(),
     regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount
-));
+    utilities.handleErrors(accountController.registerAccount)
+);
 
 module.exports = router;
