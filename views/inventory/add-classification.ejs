@@ -6,9 +6,17 @@
 
 <%- messages() %>
 
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li class="text-error-red"><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
 <form class="form-box" action="/inv/management/add-classification" method="post">
     <label for="classification_name">Classification Name:</label>
-    <input id="classification_name" name="classification_name" pattern="[0-9A-Za-z]+" required />
+    <input type="text" id="classification_name" name="classification_name" pattern="[0-9A-Za-z]+" required />
     <p>Classification names cannot contain any special characters or spaces.</p>
     <button type="submit" class="button-primary">Add</button>
 </form>
