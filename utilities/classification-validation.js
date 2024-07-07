@@ -2,7 +2,7 @@ const utilities = require("./index");
 const { body, validationResult } = require("express-validator");
 const Validate = {}
 
-Validate.registrationRules = () => {
+Validate.classificationRules = () => {
     return [
         body("classification_name")
             .trim()
@@ -27,7 +27,7 @@ Validate.checkClassificationData = async (req, res, next) => {
         });
         return
     }
-    next()
+    next();
 }
 
-module.exports = Validate
+module.exports = Validate;

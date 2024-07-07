@@ -15,7 +15,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
         }
 
         const grid = await utilities.buildClassificationGrid(data)
-        let nav = await util.getNav()
+        let nav = await utilities.getNav()
         const className = data[0].classification_name
         res.render("./inventory/classification", {
             title: className + " vehicles",
@@ -72,14 +72,28 @@ invCont.buildAddClassification = async function (req, res, next) {
         res.render("./inventory/add-classification", {
             title: "Add a Classification",
             nav,
-        })
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
+invCont.buildAddInventoryItem = async function (req, res, next) {
+    try {
+        let nav = await utilities.getNav();
+        let data = await invModel.getClassifications();
+        res.render("./inventory/add-inventory", {
+            title: "Add an Inventory Item",
+            errors: null,
+            classifications: data.rows,
+            nav
+        });
     } catch (err) {
         next(err);
     }
 }
 
 invCont.addClassification = async function (req, res) {
-    console.log("called addClassification");
     const { classification_name } = req.body;
 
     const classResult = await invModel.addClassification(classification_name);
@@ -98,6 +112,44 @@ invCont.addClassification = async function (req, res) {
         req.flash(
             "notice",
             `Failed to add classification "${classification_name}"`
+        );
+        res.status(501).render("./inventory/management", {
+            title: "Inventory Management Dashboard",
+            nav
+        });
+    }
+}
+
+invCont.addInventoryItem = async function (req, res) {
+    const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
+
+    const invResult = await invModel.addInventoryItem(
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    );
+    let nav = await utilities.getNav();
+
+    if (invResult) {
+        req.flash(
+            "notice",
+            `The inventory item "${inv_year} ${inv_make} ${inv_model}" has been added.`
+        );
+        res.status(201).render("./inventory/management", {
+            title: "Inventory Management Dashboard",
+            nav
+        });
+    } else {
+        req.flash(
+            "notice",
+            `Failed to add classification "${inv_year} ${inv_make} ${inv_model}"`
         );
         res.status(501).render("./inventory/management", {
             title: "Inventory Management Dashboard",
