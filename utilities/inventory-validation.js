@@ -35,16 +35,14 @@ Validate.inventoryRules = () => {
             .trim()
             .notEmpty()
             .withMessage("Please provide an image URL.")
-            .isURL({ require_protocol: false })
-            .withMessage("Invalid image URL format.")
-            .escape(),
+            .isURL({ require_protocol: false, require_host: false })
+            .withMessage("Invalid image URL format."),
         body("inv_thumbnail")
             .trim()
             .notEmpty()
             .withMessage("Please provide a thumbnail image URL.")
-            .isURL({ require_protocol: false })
-            .withMessage("Invalid thumbnail URL format.")
-            .escape(),
+            .isURL({ require_protocol: false, require_host: false })
+            .withMessage("Invalid thumbnail URL format."),
         body("inv_price")
             .trim()
             .notEmpty()
@@ -90,7 +88,7 @@ Validate.checkInvData = async (req, res, next) => {
     errors = validationResult(req);
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav();
-        res.render("inventory/management", {
+        res.render("inventory/add-inventory", {
             errors,
             title: "Inventory Management Dashboard",
             nav,

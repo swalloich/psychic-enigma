@@ -19,7 +19,7 @@ Validate.checkClassificationData = async (req, res, next) => {
     errors = validationResult(req);
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav();
-        res.render("inventory/management", {
+        res.render("inventory/add-classification", {
             errors,
             title: "Inventory Management Dashboard",
             nav,

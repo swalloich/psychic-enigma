@@ -6,6 +6,14 @@
 
 <%- messages() %>
 
+<% if (typeof errors !== 'undefined' && errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li class="text-error-red"><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
 <form class="form-box" action="/inv/management/add-inventory" method="post">
     <div class="form-group-vertical form-group-md-horizontal">
         <div class="form-item">
@@ -33,7 +41,7 @@
     <input type="number" id="inv_miles" name="inv_miles" required />
     <label for="inv_color">Color:</label>
     <input type="text" id="inv_color" name="inv_color" required />
-    <% if (classifications) { %>
+    <% if (typeof classifications !== 'undefined' && classifications) { %>
         <label for="classification_id">Classification:</label>
         <select id="classification_id" name="classification_id" required>
             <% classifications.forEach(classification => { %>
