@@ -43,28 +43,9 @@ accountController.registerAccount = async function (req, res) {
     } else {
         req.flash("notice", "Sorry, the registration failed.");
         res.status(501).render("account/register", {
-        title: "Registration",
-        nav,
+            title: "Registration",
+            nav,
         });
-    }
-}
-
-accountController.buildAccountById = async function (req, res, next) {
-    try {
-        const accountId = req.params.accountId;
-        const data = await acctModel.getAccountById(accountId);
-
-        if (data.length == 0) {
-            const error = new Error("No accounts with that ID were found.");
-            error.status = 404;
-            next(error);
-        }
-
-        // const account = await utilities.buildAccountView(data);
-        let nav = await utilities.getNav()
-        // TODO: finish this.
-    } catch (err) {
-        next(err);
     }
 }
 

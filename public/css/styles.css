@@ -104,6 +104,20 @@ input {
   border: 1px solid black;
 }
 
+/* Meant to hold a single label and input */
+.form-item {
+
+}
+
+/* Meant to hold groups of form-item */
+[class^="form-view-"] {
+  display: flex;
+}
+
+.form-group-vertical {
+  flex-direction: column;
+}
+
 /* begin utility classes */
 /* display mode */
 .jn-d-flex {
@@ -337,7 +351,6 @@ main {
   }
 
   /* med Inventory Item View */
-
   .inv-view-container {
     flex-direction: row;
     column-gap: 5%;
@@ -347,9 +360,15 @@ main {
   .inv-view-container > .item-desc-container {
     max-width: 50%; /* will be 100 on smaller viewports */
   }
-
   /* end med Inventory Item View */
+  /* Begin med form-item & form-group */
+  .form-group-md-horizontal {
+    flex-direction: row;
+  }
 
+  .form-group-md-horizontal > .form-item {
+    flex: 1 0 auto;
+  }
 }
 
 @media only screen and (min-width: 950px) {
