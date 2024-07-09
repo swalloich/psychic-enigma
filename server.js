@@ -12,11 +12,12 @@ const expressLayouts = require('express-ejs-layouts');
 const env = require("dotenv").config();
 const app = express();
 const bodyParser = require("body-parser");
-const static = require("./routes/static");
+const staticFiles = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const utilities = require("./utilities/index");
+const cookieParser = require("cookie-parser");
 
 /* ***********************
  * Middleware
@@ -32,7 +33,7 @@ app.use(session({
   name: 'sessionId',
 }));
 
-app.use(require('connect-flash')())
+app.use(require('connect-flash')());
 app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
@@ -40,6 +41,8 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(cookieParser());
 
 /* ***********************
  * View Engine and Templates
@@ -51,7 +54,7 @@ app.set('layout', './layouts/layout');
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(staticFiles)
 app.get('/', utilities.handleErrors(baseController.buildHome));
 // handleErrors for non-index routes called in route file.
 app.use('/inv', inventoryRoute);
