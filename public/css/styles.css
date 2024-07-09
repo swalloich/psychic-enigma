@@ -97,16 +97,36 @@ nav a, nav a:active, nav a:visited {
   text-decoration: none;
 }
 
+/* Inventory Grid */
+#inv-display {
+  display: grid;
+  row-gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+#inv-display > li {
+  list-style-type: none;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+#inv-display > li hr {
+  margin-top: 0;
+}
+
+#inv-display > li > .namePrice {
+  padding: 0 10px 20px 10px;
+}
+
 /* Forms and input */
 input {
   padding: 10px 15px;
   border-radius: 5px;
   border: 1px solid black;
-}
-
-/* Meant to hold a single label and input */
-.form-item {
-
 }
 
 /* Meant to hold groups of form-item */
@@ -350,7 +370,12 @@ main {
     margin-right: 20px;
   }
 
-  /* med Inventory Item View */
+  /* Med inventory grid */
+  #inv-display {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  /* Med Inventory item view */
   .inv-view-container {
     flex-direction: row;
     column-gap: 5%;
@@ -360,8 +385,8 @@ main {
   .inv-view-container > .item-desc-container {
     max-width: 50%; /* will be 100 on smaller viewports */
   }
-  /* end med Inventory Item View */
-  /* Begin med form-item & form-group */
+  
+  /* Med form-item & form-group */
   .form-group-md-horizontal {
     flex-direction: row;
   }
@@ -388,17 +413,20 @@ main {
     left: 15%;
   }
 
-  /* Begin medium form box */
-    .form-box {
-      max-width: 500px;
-      padding: 15px 30px;
-    }
-  /* End medium form box */
+  /* Medium form box */
+  .form-box {
+    max-width: 500px;
+    padding: 15px 30px;
+  }
 }
 
 /* Large page */
 @media only screen and (min-width: 1300px) {
   #wrapper {
     max-width: 1200px;
+  }
+
+  main {
+    padding: 0 75px;
   }
 }
