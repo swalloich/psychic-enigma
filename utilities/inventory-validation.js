@@ -64,7 +64,7 @@ Validate.inventoryRules = () => {
             .notEmpty()
             .withMessage("Please provide a color")
             .escape(),
-        body("clasification_id")
+        body("classification_id")
             .trim()
             .notEmpty()
             .withMessage("Please choose a classification")
@@ -73,6 +73,7 @@ Validate.inventoryRules = () => {
 }
 
 Validate.checkInvData = async (req, res, next) => {
+    console.log("Checking Inventory Data")
     const {
         inv_make,
         inv_model,

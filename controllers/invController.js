@@ -121,9 +121,10 @@ invCont.addClassification = async function (req, res) {
 }
 
 invCont.addInventoryItem = async function (req, res) {
+    console.log("Adding an inventory item")
     const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
 
-    const invResult = await invModel.addInventoryItem(
+    const inv_item = {
         inv_make,
         inv_model,
         inv_year,
@@ -134,7 +135,8 @@ invCont.addInventoryItem = async function (req, res) {
         inv_miles,
         inv_color,
         classification_id
-    );
+    }
+    const invResult = await invModel.addInventoryItem(inv_item);
     let nav = await utilities.getNav();
 
     if (invResult) {
