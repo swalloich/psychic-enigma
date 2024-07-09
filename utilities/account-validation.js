@@ -49,7 +49,7 @@ Validate.loginRules = () => {
             .isEmail()
             .withMessage("Provided value must be an email")
             .normalizeEmail()
-            .esacape(),
+            .escape(),
         body("account_password")
             .trim()
             .notEmpty()
