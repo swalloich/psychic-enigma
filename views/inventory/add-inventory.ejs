@@ -41,15 +41,9 @@
     <input type="number" id="inv_miles" name="inv_miles" required />
     <label for="inv_color">Color:</label>
     <input type="text" id="inv_color" name="inv_color" required />
-    <% if (typeof classifications !== 'undefined' && classifications) { %>
+    <% if (typeof classificationList !== 'undefined' && classificationList) { %>
         <label for="classification_id">Classification:</label>
-        <select id="classification_id" name="classification_id" required>
-            <% classifications.forEach(classification => { %>
-                <option value="<%= classification.classification_id %>">
-                    <%= classification.classification_name %>
-                </option>
-            <% }) %>
-        </select>
+        <%- classificationList %>
     <% } else { %>
         <p>No classifications were received from the server</p>
     <% } %>

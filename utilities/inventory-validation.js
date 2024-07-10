@@ -1,6 +1,7 @@
 const utilities = require("./index");
 const { body, validationResult } = require("express-validator");
 const Validate = {}
+const inventoryModel = require("../models/inventory-model");
 
 Validate.inventoryRules = () => {
     return [
@@ -86,11 +87,16 @@ Validate.checkInvData = async (req, res, next) => {
     } = req.body;
     let errors = [];
     errors = validationResult(req);
+
+    const data = await inventoryModel.getClassifications();
+    const classificationList = await utilities.buildClassificationList(data);
+
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav();
         res.render("inventory/add-inventory", {
             errors,
             title: "Inventory Management Dashboard",
+            classificationList: classificationList,
             nav,
             inv_make,
             inv_model,

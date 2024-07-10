@@ -71,6 +71,15 @@ Util.buildInvItemDescription = async function (data) {
     return description;
 }
 
+Util.buildClassificationList = async function (data) {
+    let select = `<select id="classification_id" name="classification_id" required>`;
+    data.rows.forEach(row => {
+        select += `<option value="${row.classification_id}">${row.classification_name}</option>`;
+    });
+    select += "</select>";
+    return select;
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
