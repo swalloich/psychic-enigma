@@ -1,4 +1,6 @@
-const invModel = require("../models/inventory-model")
+const invModel = require("../models/inventory-model");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 /* ****************************************
 *  Deliver login view
@@ -67,6 +69,26 @@ Util.buildInvItemDescription = async function (data) {
         description += `<p><span class="text-bold">Miles:</span> ${data[0].inv_miles.toLocaleString()}</p>`
     }
     return description;
+}
+
+Util.checkJWTToken = (req, res, next) => {
+    if (req.cookies.jwt) {
+        jwt.verify(
+            req.cookies.jwt,
+            process.env.ACCESS_TOKEN_SECRET,
+            function (err, accountData) {
+                if (err) {
+                    req.flash("Please log in");
+                    res.clearCookie('jwt');
+                    return res.redirect("/account/login");
+                }
+                res.locals.accountData = accountData;
+                res.locals.loggedin = 1;
+                next();
+        });
+    } else {
+        next();
+    }
 }
 
 /* ****************************************
