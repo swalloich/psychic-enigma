@@ -25,6 +25,12 @@
 
   --default-text-color: black;
   --dark-bg-text-color: white;
+
+  --spacer-1: .25rem;
+  --spacer-2: .5rem;
+  --spacer-3: 1rem;
+  --spacer-4: 1.5rem;
+  --spacer-5: 3rem;
 }
 
 html, body {
@@ -98,14 +104,14 @@ nav a, nav a:active, nav a:visited {
 }
 
 /* Inventory Grid */
-#inv-display {
+.inventory-grid {
   display: grid;
   row-gap: 30px;
   padding: 0;
   margin: 0;
 }
 
-#inv-display > li {
+.inventory-grid > li {
   list-style-type: none;
   width: 200px;
   border: 1px solid black;
@@ -114,11 +120,11 @@ nav a, nav a:active, nav a:visited {
   margin: 0 auto;
 }
 
-#inv-display > li hr {
+.inventory-grid > li hr {
   margin-top: 0;
 }
 
-#inv-display > li > .namePrice {
+.inventory-grid > li > .namePrice {
   padding: 0 10px 20px 10px;
 }
 
@@ -160,6 +166,19 @@ input {
 
 .jn-w-100 {
   width: 100%;
+}
+
+/* Margin & padding */
+.mt-1 {
+  margin-top: var(--spacer-1);
+}
+
+.mt-2 {
+  margin-top: var(--spacer-2);
+}
+
+.mt-3 {
+  margin-top: var(--spacer-3);
 }
 
 /* color */
@@ -371,7 +390,7 @@ main {
   }
 
   /* Med inventory grid */
-  #inv-display {
+  .inventory-grid {
     grid-template-columns: 1fr 1fr 1fr;
   }
 

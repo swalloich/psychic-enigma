@@ -3,6 +3,16 @@ const utilities = require('../utilities/')
 
 const invCont = {}
 
+invCont.getInventoryJSON = async (req, res, next) => {
+    const classification_id = parseInt(req.params.classification_id);
+    const invData = await invModel.getInventoryByClassificationId(classification_id);
+    if (invData[0].inv_id) {
+        return res.json(invData);
+    } else {
+        next(new Error("No data returned"));
+    }
+}
+
 invCont.buildByClassificationId = async function (req, res, next) {
     try {
         const classification_id = req.params.classificationId
@@ -57,8 +67,12 @@ invCont.buildByInvId = async function (req, res, next) {
 invCont.buildInvManagement = async function (req, res, next) {
     try {
         let nav = await utilities.getNav();
+        const data = await invModel.getClassifications();
+        const classificationSelect = await utilities.buildClassificationList(data);
+
         res.render("./inventory/management", {
             title: "Inventory Management Dasboard",
+            classificationList: classificationSelect,
             nav
         });
     } catch (err) {
@@ -81,11 +95,12 @@ invCont.buildAddClassification = async function (req, res, next) {
 invCont.buildAddInventoryItem = async function (req, res, next) {
     try {
         let nav = await utilities.getNav();
-        let data = await invModel.getClassifications();
+        const data = await invModel.getClassifications();
+        const classificationList = await utilities.buildClassificationList(data);
         res.render("./inventory/add-inventory", {
             title: "Add an Inventory Item",
             errors: null,
-            classifications: data.rows,
+            classificationList: classificationList,
             nav
         });
     } catch (err) {
@@ -97,6 +112,8 @@ invCont.addClassification = async function (req, res) {
     const { classification_name } = req.body;
 
     const classResult = await invModel.addClassification(classification_name);
+    const data = await invModel.getClassifications();
+    const classificationSelect = await utilities.buildClassificationList(data);
     let nav = await utilities.getNav();
 
     if (classResult) {
@@ -106,6 +123,7 @@ invCont.addClassification = async function (req, res) {
         );
         res.status(201).render('./inventory/management', {
             title: "Inventory Management Dasboard",
+            classificationList: classificationSelect,
             nav
         });
     } else {
@@ -115,6 +133,7 @@ invCont.addClassification = async function (req, res) {
         );
         res.status(501).render("./inventory/management", {
             title: "Inventory Management Dashboard",
+            classificationList: classificationSelect,
             nav
         });
     }
@@ -137,6 +156,8 @@ invCont.addInventoryItem = async function (req, res) {
         classification_id
     }
     const invResult = await invModel.addInventoryItem(inv_item);
+    const data = await invModel.getClassifications();
+    const classificationSelect = await utilities.buildClassificationList(data);
     let nav = await utilities.getNav();
 
     if (invResult) {
@@ -146,6 +167,7 @@ invCont.addInventoryItem = async function (req, res) {
         );
         res.status(201).render("./inventory/management", {
             title: "Inventory Management Dashboard",
+            classificationList: classificationSelect,
             nav
         });
     } else {
@@ -155,6 +177,7 @@ invCont.addInventoryItem = async function (req, res) {
         );
         res.status(501).render("./inventory/management", {
             title: "Inventory Management Dashboard",
+            classificationList: classificationSelect,
             nav
         });
     }

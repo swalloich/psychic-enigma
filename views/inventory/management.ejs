@@ -10,3 +10,17 @@
     <li><a href="/inv/management/add-classification">Add Classification</a></li>
     <li><a href="/inv/management/add-inventory">Add Inventory Item</a></li>
 </ul>
+
+<h2>Manage Inventory</h2>
+<p>Select a classification from the list to see vehicles in that classification.</p>
+<% if (typeof classificationList !== 'undefined' && classificationList) { %>
+    <label for="classification_id">Classification:</label>
+    <%- classificationList %>
+<% } else { %>
+    <p>No classifications were received from the server</p>
+<% } %>
+<table id="inv-display" class="mt-3">
+    <%# Will be filled in by JS in inventory.js %>
+</table>
+<noscript>JavaScript must be enabled to use this page.</noscript>
+<script src="../../js/inventory.js"></script>
