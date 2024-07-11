@@ -71,12 +71,11 @@ Util.buildInvItemDescription = async function (data) {
     return description;
 }
 
-Util.buildClassificationList = async function (data) {
-    let select = `<select id="classification_id" name="classification_id" required>`;
+Util.buildClassificationList = async function (data, selected=null) {
+    let select = "";
     data.rows.forEach(row => {
-        select += `<option value="${row.classification_id}">${row.classification_name}</option>`;
+        select += `<option value="${row.classification_id}" ${(selected && selected == row.classification_id) ? "selected" : ""}>${row.classification_name}</option>`;
     });
-    select += "</select>";
     return select;
 }
 

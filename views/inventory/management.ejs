@@ -15,7 +15,9 @@
 <p>Select a classification from the list to see vehicles in that classification.</p>
 <% if (typeof classificationList !== 'undefined' && classificationList) { %>
     <label for="classification_id">Classification:</label>
-    <%- classificationList %>
+    <select id="classification_id" name="classification_id" required>
+        <%- classificationList %>
+    </select>
 <% } else { %>
     <p>No classifications were received from the server</p>
 <% } %>
