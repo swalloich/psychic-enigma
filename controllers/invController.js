@@ -51,10 +51,10 @@ invCont.buildByInvId = async function (req, res, next) {
         const bodyHtml = await utilities.buildInvItemDescription(data);
         let nav = await utilities.getNav();
         res.render("./inventory/item", {
-            title: `${data[0].inv_year} ${data[0].inv_make} ${data[0].inv_model}`,
+            title: `${data.inv_year} ${data.inv_make} ${data.inv_model}`,
             img: {
-                url: data[0].inv_image,
-                alt: `${data[0].inv_year} ${data[0].inv_make} ${data[0].inv_model}`
+                url: data.inv_image,
+                alt: `${data.inv_year} ${data.inv_make} ${data.inv_model}`
             },
             description: bodyHtml,
             nav: nav
@@ -110,8 +110,8 @@ invCont.buildAddInventoryItem = async function (req, res, next) {
 
 invCont.editInventoryView = async function (req, res) {
     console.log("Editing an inventory item")
-    const inv_id = parseInt(req.params.inv_id)
-    let nav = utilities.getNav();
+    const inv_id = parseInt(req.params.inventory_id)
+    let nav = await utilities.getNav();
     const itemData = await invModel.getInventoryByInvId(inv_id);
     const data = await invModel.getClassifications();
     const classificationSelect = await utilities.buildClassificationList(data);

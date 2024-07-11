@@ -28,7 +28,7 @@ async function getInventoryByInvId(inventory_id) {
         if (data.rowCount > 1) {
             throw Error("More than one result was returned!")
         }
-        return data.rows
+        return data.rows[0];
     } catch (err) {
         console.error("getInventoryByInvId error: " + err)
     }
