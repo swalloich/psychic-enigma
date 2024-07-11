@@ -173,7 +173,52 @@ invCont.addInventoryItem = async function (req, res) {
     } else {
         req.flash(
             "notice",
-            `Failed to add classification "${inv_year} ${inv_make} ${inv_model}"`
+            `Failed to add "${inv_year} ${inv_make} ${inv_model}"`
+        );
+        res.status(501).render("./inventory/management", {
+            title: "Inventory Management Dashboard",
+            classificationList: classificationSelect,
+            nav
+        });
+    }
+}
+
+invCont.editInventoryItem = async function (req, res) {
+    console.log("Editing an inventory item")
+    const { inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
+    const inv_item = {
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    }
+
+    const invResult = await invModel.editInventoryItem(inv_item);
+    const data = await invModel.getClassifications();
+    const classificationSelect = await utilities.buildClassificationList(data);
+    let nav = utilities.getNav();
+
+    if (invResult) {
+        req.flash(
+            "notice",
+            `The inventory item "${inv_year} ${inv_make} ${inv_model}" has been modified.`
+        );
+        res.status(201).render("./inventory/management", {
+            title: "Inventory Management Dashboard",
+            classificationList: classificationSelect,
+            nav
+        });
+    } else {
+        req.flash(
+            "notice",
+            `Failed to modify "${inv_year} ${inv_make} ${inv_model}"`
         );
         res.status(501).render("./inventory/management", {
             title: "Inventory Management Dashboard",

@@ -64,10 +64,52 @@ async function addInventoryItem(inv_item) {
 
 }
 
+/**
+ * Modifies an existing inventory item to have the values in a
+ * provided object.
+ * @param {Object} inv_item Should be an object containing values for
+ *                          each column in the inventory table.
+ * @returns The results of the query.
+ */
+async function editInventoryItem(inv_item) {
+    try {
+        const sql = `
+            UPDATE inventory
+            SET inv_make = $1,
+                inv_model = $2,
+                inv_year = $3,
+                inv_description = $4,
+                inv_image = $5,
+                inv_thumbnail = $6,
+                inv_price = $7,
+                inv_miles = $8,
+                inv_color = $9,
+                classification_id = $10
+            WHERE inv_id = $11
+            RETURNING *;`;
+        return await pool.query(sql, [
+            inv_item.inv_make,
+            inv_item.inv_model,
+            inv_item.inv_year,
+            inv_item.inv_description,
+            inv_item.inv_image,
+            inv_item.inv_thumbnail,
+            inv_item.inv_price,
+            inv_item.inv_miles,
+            inv_item.inv_color,
+            inv_item.classification_id,
+            inv_item.inv_id
+        ]);
+    } catch (err) {
+        return err.message;
+    }
+}
+
 module.exports = {
     getClassifications,
     getInventoryByClassificationId,
     getInventoryByInvId,
     addClassification,
-    addInventoryItem
+    addInventoryItem,
+    editInventoryItem
 };
