@@ -136,12 +136,25 @@ input {
 }
 
 /* Meant to hold groups of form-item */
-[class^="form-view-"] {
+[class^="form-group-"] {
   display: flex;
 }
 
 .form-group-vertical {
   flex-direction: column;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+}
+
+.form-item > label {
+  width: 25%;
+}
+
+.form-item > input {
+  flex: 1 0;
 }
 
 /* begin utility classes */
@@ -408,10 +421,21 @@ main {
   /* Med form-item & form-group */
   .form-group-md-horizontal {
     flex-direction: row;
+    column-gap: 10px;
   }
 
   .form-group-md-horizontal > .form-item {
     flex: 1 0 auto;
+    flex-direction: column;
+    max-width: 33%;
+  }
+
+  .form-item {
+    align-items: initial;
+  }
+
+  .form-item > input {
+    flex: none;
   }
 }
 
