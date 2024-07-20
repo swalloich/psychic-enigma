@@ -14,7 +14,7 @@
     </ul>
 <% } %>
 
-<form class="form-box" action="/inv/update" method="post">
+<form class="form-box" id="updateForm" action="/inv/update" method="post">
     <div class="form-group-vertical form-group-md-horizontal">
         <div class="form-item">
             <label for="inv_make">Make:</label>
@@ -49,5 +49,9 @@
     <% } else { %>
         <p>No classifications were received from the server</p>
     <% } %>
-    <button type="submit" class="button-primary">Update Vehicle</button>
+    <button type="submit" class="button-primary" id="update-btn" disabled>Update Vehicle</button>
+    <input type="hidden" name="inv_id"
+    <% if (locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %> />
 </form>
+<script src="../../js/inventory-update.js" defer></script>

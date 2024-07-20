@@ -351,6 +351,12 @@ main {
   background-color: darkorange;
 }
 
+.button-primary:disabled,
+.button-primary:disabled:hover {
+  background-color: lightgray;
+  color: gray;
+}
+
 /* TODO: implement button-secondary */
 /* End button */
 

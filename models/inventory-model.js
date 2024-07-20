@@ -71,7 +71,7 @@ async function addInventoryItem(inv_item) {
  *                          each column in the inventory table.
  * @returns The results of the query.
  */
-async function editInventoryItem(inv_item) {
+async function updateInventory(inv_item) {
     try {
         const sql = `
             UPDATE inventory
@@ -87,7 +87,7 @@ async function editInventoryItem(inv_item) {
                 classification_id = $10
             WHERE inv_id = $11
             RETURNING *;`;
-        return await pool.query(sql, [
+        const data = await pool.query(sql, [
             inv_item.inv_make,
             inv_item.inv_model,
             inv_item.inv_year,
@@ -100,6 +100,7 @@ async function editInventoryItem(inv_item) {
             inv_item.classification_id,
             inv_item.inv_id
         ]);
+        return data.rows[0];
     } catch (err) {
         return err.message;
     }
@@ -111,5 +112,5 @@ module.exports = {
     getInventoryByInvId,
     addClassification,
     addInventoryItem,
-    editInventoryItem
+    updateInventory
 };

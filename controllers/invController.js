@@ -116,7 +116,7 @@ invCont.editInventoryView = async function (req, res) {
     const data = await invModel.getClassifications();
     const classificationSelect = await utilities.buildClassificationList(data, itemData.classification_id);
     const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
-    
+
     res.render("./inventory/edit-inventory", {
         title: `Edit ${itemName}`,
         nav,
@@ -208,6 +208,72 @@ invCont.addInventoryItem = async function (req, res) {
             title: "Inventory Management Dashboard",
             classificationList: classificationSelect,
             nav
+        });
+    }
+}
+
+invCont.updateInventory = async function (req, res) {
+    console.log("Updating an inventory item")
+    const {
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    } = req.body;
+
+    const inv_item = {
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    }
+    const updateResult = await invModel.updateInventory(inv_item);
+    const data = await invModel.getClassifications();
+    const classificationSelect = await utilities.buildClassificationList(data);
+
+    let nav = await utilities.getNav();
+
+    if (updateResult) {
+        req.flash(
+            "notice",
+            `The inventory item "${inv_year} ${inv_make} ${inv_model}" has been updated.`
+        );
+        res.redirect("/inv/management");
+    } else {
+        req.flash(
+            "notice",
+            `Failed to update "${inv_year} ${inv_make} ${inv_model}"`
+        );
+        res.status(501).render("./inventory/management", {
+            title: "Inventory Management Dashboard",
+            classificationList: classificationSelect,
+            nav,
+            errors: null,
+            inv_id,
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_image,
+            inv_thumbnail,
+            inv_price,
+            inv_miles,
+            inv_color,
+            classification_id
         });
     }
 }
