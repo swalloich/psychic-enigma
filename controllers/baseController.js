@@ -3,7 +3,8 @@ const baseController = {}
 
 baseController.buildHome = async function(req, res) {
     const nav = await utilities.getNav()
-    res.render("index", {title: "Home", nav})
+    const loggedin = (req.cookies.jwt) ? true : false;
+    res.render("index", {title: "Home", nav, loggedin});
 }
 
 module.exports = baseController

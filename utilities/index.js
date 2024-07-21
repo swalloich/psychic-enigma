@@ -106,13 +106,17 @@ Util.checkJWTToken = (req, res, next) => {
     }
 }
 
-Util.checkLogin = (req, res, next) => {
+Util.requireLogin = (req, res, next) => {
     if (res.locals.loggedin) {
         next();
     } else {
         req.flash("notice", "Please log in.");
         return res.redirect("/account/login");
     }
+}
+
+Util.loggedin = (req, res, next) => {
+    next();
 }
 
 module.exports = Util
